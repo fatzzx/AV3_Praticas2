@@ -193,6 +193,7 @@ void User::ask_questions() {
 
 
 void User::save_to_file(const std::string& filename) {
+    
     std::ofstream file(filename, std::ios::app);
     
     if (file.is_open()) {
@@ -213,6 +214,7 @@ void User::save_to_file(const std::string& filename) {
     } else {
         std::cout << "Não foi possível abrir o arquivo: " << filename << std::endl;
     }
+
 }
 
 

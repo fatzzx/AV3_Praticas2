@@ -60,54 +60,106 @@ void calculate_violation_totals(const std::string& filename){
     int totalQ4 = 0;
     int totalQ5 = 0;
     int totalQ6 = 0;
-    int totalGenderM = 0;
-    int totalGenderF = 0;
-    int totalGenderO = 0; 
+    int totalViolationsInGenderM = 0;
+    int totalViolationsInGenderF = 0;
+    int totalViolationsInGenderO = 0;
     int totalAgeUnder18 = 0;
     int totalAgeAbove18 = 0;
+    bool male = false;
+    bool female = false;
+    bool other = false;
+    bool under18 = false;
+    bool above18 = false;
 
     while (std::getline(file, line)) {
+
+        if (line.find("Gênero: masculino") != std::string::npos) {
+            male = true;
+            female = false;
+            other = false; 
+        }
+
+        if (line.find("Gênero: feminino") != std::string::npos) {
+            male = false;
+            female = true;
+            other = false; 
+        }
+
+        if (line.find("Gênero: outro") != std::string::npos) {
+            male = false;
+            female = false;
+            other = true;  
+        }
+
+
         if (line.find("Q1: sim") != std::string::npos) {
             totalViolations++;
             totalQ1++;
+            if(male == true) totalViolationsInGenderM++;
+            else if(female == true) totalViolationsInGenderF++;
+            else if(other == true) totalViolationsInGenderO++;
+            if(under18 == true) totalAgeUnder18++;
+            else if(above18 == true) totalAgeAbove18++;
         }
+
         if (line.find("Q2: sim") != std::string::npos) {
             totalViolations++;
             totalQ2++;
+            if(male == true) totalViolationsInGenderM++;
+            else if(female == true) totalViolationsInGenderF++;
+            else if(other == true) totalViolationsInGenderO++;
+            if(under18 == true) totalAgeUnder18++;
+            else if(above18 == true) totalAgeAbove18++;
         }
+
         if (line.find("Q3: sim") != std::string::npos) {
             totalViolations++;
             totalQ3++;
+            if(male == true) totalViolationsInGenderM++;
+            else if(female == true) totalViolationsInGenderF++;
+            else if(other == true) totalViolationsInGenderO++;
+            if(under18 == true) totalAgeUnder18++;
+            else if(above18 == true) totalAgeAbove18++;
         }
+
         if (line.find("Q4: sim") != std::string::npos) {
             totalViolations++;
             totalQ4++;
+            if(male == true) totalViolationsInGenderM++;
+            else if(female == true) totalViolationsInGenderF++;
+            else if(other == true) totalViolationsInGenderO++;
+            if(under18 == true) totalAgeUnder18++;
+            else if(above18 == true) totalAgeAbove18++;
         }
+
         if (line.find("Q5: sim") != std::string::npos) {
             totalViolations++;
             totalQ5++;
+            if(male == true) totalViolationsInGenderM++;
+            else if(female == true) totalViolationsInGenderF++;
+            else if(other == true) totalViolationsInGenderO++;
+            if(under18 == true) totalAgeUnder18++;
+            else if(above18 == true) totalAgeAbove18++;
         }
+
         if (line.find("Q6: sim") != std::string::npos) {
             totalViolations++;
             totalQ6++;
-        }
-
-        if (line.find("Gênero: masculino") != std::string::npos) {
-            totalGenderM++;
-        }
-        if (line.find("Gênero: feminino") != std::string::npos) {
-            totalGenderF++;
-        }
-        if (line.find("Gênero: outro") != std::string::npos) { // Verifica se o gênero é "outro"
-            totalGenderO++;
+            if(male == true) totalViolationsInGenderM++;
+            else if(female == true) totalViolationsInGenderF++;
+            else if(other == true) totalViolationsInGenderO++;
+            if(under18 == true) totalAgeUnder18++;
+            else if(above18 == true) totalAgeAbove18++;
         }
 
         if (line.find("Idade: ") != std::string::npos) {
             int age = std::stoi(line.substr(line.find("Idade: ") + 7));
             if (age < 18) {
-                totalAgeUnder18++;
+                under18 = true;
+                above18 = false;
             } else {
-                totalAgeAbove18++;
+                under18 = false;
+                above18 = true;
             }
         }
     }
@@ -121,12 +173,13 @@ void calculate_violation_totals(const std::string& filename){
     std::cout << "Total de violações da Q4: " << totalQ4 << std::endl;
     std::cout << "Total de violações da Q5: " << totalQ5 << std::endl;
     std::cout << "Total de violações da Q6: " << totalQ6 << std::endl;
-    std::cout << "Total de violações por gênero - Masculino: " << totalGenderM << std::endl;
-    std::cout << "Total de violações por gênero - Feminino: " << totalGenderF << std::endl;
-    std::cout << "Total de violações por gênero - Outro: " << totalGenderO << std::endl;
+    std::cout << "Total de violações por gênero - Masculino: " << totalViolationsInGenderM << std::endl;
+    std::cout << "Total de violações por gênero - Feminino: " << totalViolationsInGenderF << std::endl;
+    std::cout << "Total de violações por gênero - Outro: " << totalViolationsInGenderO << std::endl;
     std::cout << "Total de violações para menores de 18 anos: " << totalAgeUnder18 << std::endl;
     std::cout << "Total de violações para maiores ou iguais a 18 anos: " << totalAgeAbove18 << std::endl;
 }
+
 
 void display_menu(){
     #ifdef _WIN32
