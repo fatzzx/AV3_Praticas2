@@ -5,6 +5,7 @@
 #include <vector>
 #include <cstdlib>
 
+//Declaracoes das funcoes usadas 
 void print_file(const std::string& filename);
 std::string searched_name();
 void search_user_by_name(const std::string& name, const std::string& filename);

@@ -3,7 +3,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
-
+//Arquivo para declaracao da classe User onde serao declarados seus stributos e metodos, os metodos contem nomes autoexplicativos.
 class User {
 private:
     std::string m_age;

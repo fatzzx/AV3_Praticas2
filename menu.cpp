@@ -1,5 +1,6 @@
 #include "menu.hpp"
 
+//Funcao tem um loop principalr que vai percorrendo e printando cada linha do arquivo
 void print_file(const std::string& filename){
     std::ifstream file(filename);
 
@@ -16,13 +17,16 @@ void print_file(const std::string& filename){
     }
 }
 
-std::string searched_name(){
+//Funcao recebe um string e retorna ela
+std::string searched_name() {
     std::string name;
-    std::cout << "Qual o nome da pessoa que deseja buscar ?" << std::endl;
-    std::cin >> name;
+    std::cout << "Qual o nome da pessoa que deseja buscar?" << std::endl;
+    std::getline(std::cin >> std::ws, name);
     return name;
 }
 
+
+//Funcao percorre todo o arquivo ate achar a linha onde consta o nome do participante buscado, apos achar a linha ela printa as proximas 8 linhas que constam todas as outras informacoes
 void search_user_by_name(const std::string& name, const std::string& filename) {
     std::ifstream file(filename);
     std::string line;
@@ -49,7 +53,7 @@ void search_user_by_name(const std::string& name, const std::string& filename) {
     file.close();
 }
 
-
+//Funcao que inicializa varias variaveis e percorre todo o arquivo incrementando o valor delas com base na aparição das respostas
 void calculate_violation_totals(const std::string& filename){
     std::ifstream file(filename);
     std::string line;
@@ -180,7 +184,7 @@ void calculate_violation_totals(const std::string& filename){
     std::cout << "Total de violações para maiores ou iguais a 18 anos: " << totalAgeAbove18 << std::endl;
 }
 
-
+//Printa o menu
 void display_menu(){
     #ifdef _WIN32
         std::cout << "MENU PRINCIPAL" << std::endl;
@@ -202,6 +206,7 @@ void display_menu(){
     #endif
 }
 
+//Limpa a tela do terminal em todos OS
 void clear_screen(){
     #ifdef _WIN32 
         system("cls");

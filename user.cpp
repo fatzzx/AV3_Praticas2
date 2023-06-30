@@ -1,5 +1,6 @@
 #include "user.hpp"
 
+//Desenvolvendo os metodos da classe User, os metodos sao autoexplicativos 
 
 std::string User::get_age() {
     return m_age;
@@ -28,14 +29,33 @@ void User::set_gender(char gender) {
 void User::ask_age() {
     std::string age;
     std::cout << "Qual a sua idade?" << std::endl;
-    std::cin >> age;
+
+    while (true) {
+        std::getline(std::cin, age);
+        bool isNumber = true;
+        for (char c : age) {
+            if (!std::isdigit(c)) {
+                isNumber = false;
+                break;
+            }
+        }
+
+        if (isNumber) {
+            break;
+        } else {
+            std::cout << "Idade inválida! Digite apenas números." << std::endl;
+        }
+    }
+
     m_age = age;
 }
+
 
 void User::ask_name() {
     std::string name;
     std::cout << "Qual o seu nome?" << std::endl;
-    std::cin >> name;
+    std::cin.ignore(); 
+    std::getline(std::cin, name);
     m_name = name;
 }
 
@@ -43,13 +63,21 @@ void User::ask_gender() {
     std::string gender;
     std::cout << "Qual o seu gênero? Digite 'masculino', 'feminino' ou 'outro'" << std::endl;
 
-    while(1) {
-        std::cin >> gender;
-        if(gender == "masculino" || gender == "feminino" || gender == "outro") break;
-        else std::cout << "Opção inválida! Por favor, digite 'masculino', 'feminino' ou 'outro'" << std::endl;
+    while (true) {
+        std::getline(std::cin, gender);
+
+        if (gender == "masculino" || gender == "feminino" || gender == "outro") {
+            break;
+        } else {
+            std::cout << "Opção inválida! Por favor, digite 'masculino', 'feminino' ou 'outro'" << std::endl;
+        }
     }
+
     m_gender = gender;
 }
+
+
+
 
 
 void User::ask_q1() {
@@ -191,9 +219,8 @@ void User::ask_questions() {
     ask_q6();
 }
 
-
+//Funcao printa nas ultimas linhas do arquivo as informacoes de um novo partcipante
 void User::save_to_file(const std::string& filename) {
-    
     std::ofstream file(filename, std::ios::app);
     
     if (file.is_open()) {
@@ -214,7 +241,6 @@ void User::save_to_file(const std::string& filename) {
     } else {
         std::cout << "Não foi possível abrir o arquivo: " << filename << std::endl;
     }
-
 }
 
 
